@@ -10,10 +10,14 @@ jobs:
     strategy:
       matrix:
         animal: [cat, dog, horse]
-        colors: [red, green, blue]
+        color: [red, green, blue]
+
+        exclude:
+          - animal: horse
+          - color: red
 
     steps:
     - name: Echo
       run: |
         echo "Animal: ${{ matrix.animal }}" >> $GITHUB_STEP_SUMMARY
-        echo "Color: ${{ matrix.colors }}" >> $GITHUB_STEP_SUMMARY
+        echo "Color: ${{ matrix.color }}" >> $GITHUB_STEP_SUMMARY
