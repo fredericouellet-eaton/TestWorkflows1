@@ -17,7 +17,10 @@ jobs:
       matrix:
         animal: [cat, dog, horse]
         color: [red, green, blue]
-
+        include:
+          - animal: cat
+          - animal: horse
+            color: blue
         exclude: ${{ fromJson(inputs.exclude || '[]') }}
 
     steps:
