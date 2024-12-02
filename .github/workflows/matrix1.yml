@@ -3,6 +3,12 @@ name: Matrix Example
 on: 
   push:
   workflow_dispatch:
+    inputs:
+      exclude:
+        description: 'Exclude triplets:'
+        type: string
+        default: '[]'
+        required: false
 
 jobs:
   build:
@@ -12,9 +18,7 @@ jobs:
         animal: [cat, dog, horse]
         color: [red, green, blue]
 
-        exclude:
-          - animal: horse
-          - color: red
+        exclude: ${{ fromJson(inputs.exclude || '[]') }}
 
     steps:
     - name: Echo
