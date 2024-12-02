@@ -1,0 +1,19 @@
+name: Matrix Example
+
+on: 
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        animal: [cat, dog, horse]
+        colors: [red, green, blue]
+
+    steps:
+    - name: Echo
+      run: |
+        echo "Animal: ${{ matrix.animal }}" >> $GITHUB_STEP_SUMMARY
+        echo "Color: ${{ matrix.colors }}" >> $GITHUB_STEP_SUMMARY
