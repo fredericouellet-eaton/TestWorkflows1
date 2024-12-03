@@ -14,3 +14,25 @@ jobs:
   Build0:
     uses: ./.github/workflows/matrix1.yml
     secrets: inherit
+    with:      
+      matrix: >-
+        {
+          "os": [
+            "windows-latest",
+            "ubuntu-latest"
+          ],
+          "triplet": [
+            "x86-windows",
+            "x64-windows",
+            "x86-linux",
+            "x64-linux",
+            "arm-linux-gnueabi",
+            "arm-linux-gnueabihf",
+            "aarch64-linux-gnu"
+          ],
+          "config": [
+            "release",
+            "debug"
+          ],
+          "exclude": ${{ fromJson(inputs.exclude || '[]') }}
+        }

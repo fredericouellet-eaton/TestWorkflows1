@@ -2,6 +2,12 @@ name: Matrix Example
 
 on: 
   workflow_call:
+    inputs:
+      matrix:
+        description: 'Matrix:'
+        type: string
+        required: true
+
   workflow_dispatch:
     inputs:
       exclude:
@@ -13,52 +19,7 @@ on:
 jobs:
   Build1:
     strategy:
-      matrix:
-        triplet: [x86-windows, x64-windows, x86-linux, x64-linux, arm-linux-gnueabi, arm-linux-gnueabihf, aarch64-linux-gnu]
-        config: [release, debug]
-        exclude: ${{ fromJson(inputs.exclude || '[]') }}
-        include:
-          - os: windows-latest
-            triplet: x86-windows
-            host_triplet: x64-windows
-            apt: ''
-            test: false
-
-          - os: windows-latest
-            triplet: x64-windows
-            host_triplet: x64-windows
-            apt: ''
-            test: false
-
-          - os: ubuntu-latest
-            triplet: x86-linux
-            host_triplet: x64-linux
-            apt: gcc-multilib g++-multilib
-            test: true
-
-          - os: ubuntu-latest
-            triplet: x64-linux
-            host_triplet: x64-linux
-            apt: ''
-            test: true
-
-          - os: ubuntu-latest
-            triplet: arm-linux-gnueabi
-            host_triplet: x64-linux
-            apt: gcc-arm-linux-gnueabi g++-arm-linux-gnueabi
-            test: false
-
-          - os: ubuntu-latest
-            triplet: arm-linux-gnueabihf
-            host_triplet: x64-linux
-            apt: gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
-            test: false
-
-          - os: ubuntu-latest
-            triplet: aarch64-linux-gnu
-            host_triplet: x64-linux
-            apt: gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
-            test: false        
+      matrix: ${{ fromJson(inputs.matrix || '{}' ) }}
 
     uses: ./.github/workflows/matrix2.yml
     secrets: inherit
