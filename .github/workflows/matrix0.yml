@@ -37,4 +37,5 @@ jobs:
             "release",
             "debug"
           ]
+          "test": [ false ]
         }
