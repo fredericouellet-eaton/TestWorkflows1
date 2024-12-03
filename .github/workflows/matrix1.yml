@@ -16,10 +16,6 @@ jobs:
     env:
       MATRIX: >-
         {
-          "os": [
-            "windows",
-            "linux"
-          ],
           "triplet": [
             "x86-windows",
             "x64-windows",
@@ -32,22 +28,6 @@ jobs:
           "config": [
             "release",
             "debug"
-          ],
-          "include": [ 
-            {
-              "os": "windows",
-              "runner": "windows-latest", 
-              "apt": "",
-              "host_triplet": "x64-windows",
-              "test": false
-            },
-            {
-              "os": "linux",
-              "runner": "ubuntu-latest", 
-              "apt": "",
-              "host_triplet": "x64-linux",
-              "test": false
-            }
           ]
         }
     outputs:
@@ -69,9 +49,5 @@ jobs:
     uses: ./.github/workflows/matrix2.yml
     secrets: inherit
     with:
-      os: ${{ matrix.os }}
       triplet: ${{ matrix.triplet }}
       config: ${{ matrix.config }}
-      host_triplet: ${{ matrix.host_triplet }}
-      apt: ${{ matrix.apt }}
-      test: ${{ matrix.test }}
