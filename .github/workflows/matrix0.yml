@@ -33,6 +33,5 @@ jobs:
           "config": [
             "release",
             "debug"
-          ],
-          "exclude": ${{ fromJson(inputs.exclude || '[]') }}
+          ]
         }
