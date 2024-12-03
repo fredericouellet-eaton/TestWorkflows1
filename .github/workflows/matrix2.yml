@@ -34,10 +34,25 @@ on:
         default: false
 
 jobs:
-  Build2:
+  Build:
+    name: "Build2 ${{ inputs.triplet }}-${{ inputs.config}}"
     runs-on: ubuntu-latest
     steps:
-    - name: Echo2
+    - name: Echo2 
+      run: |
+        echo "OS: ${{ inputs.os }}" >> $GITHUB_STEP_SUMMARY
+        echo "Triplet: ${{ inputs.triplet }}" >> $GITHUB_STEP_SUMMARY
+        echo "Config: ${{ inputs.config }}" >> $GITHUB_STEP_SUMMARY
+        echo "Host Triplet: ${{ inputs.host_triplet }}" >> $GITHUB_STEP_SUMMARY
+        echo "Apt: ${{ inputs.apt }}" >> $GITHUB_STEP_SUMMARY
+        echo "Test: ${{ inputs.test }}" >> $GITHUB_STEP_SUMMARY
+
+  Test:
+    name: "Test2 ${{ inputs.triplet }}-${{ inputs.config}}"
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Echo2 
       run: |
         echo "OS: ${{ inputs.os }}" >> $GITHUB_STEP_SUMMARY
         echo "Triplet: ${{ inputs.triplet }}" >> $GITHUB_STEP_SUMMARY

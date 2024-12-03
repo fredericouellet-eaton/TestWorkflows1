@@ -25,6 +25,7 @@ jobs:
         echo "Matrix: ${{ inputs.matrix }}" >> $GITHUB_STEP_SUMMARY
         
   Build1:
+    name: "${{ matrix.triplet }}-${{ matrix.config}}"
     strategy:
       matrix: ${{ fromJson(inputs.matrix || '{}' ) }}
 
