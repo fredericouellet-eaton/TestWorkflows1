@@ -63,9 +63,9 @@ jobs:
     uses: ./.github/workflows/matrix2.yml
     secrets: inherit
     with:
-      os: matrix.os
-      triplet: matrix.triplet
-      config: matrix.config
-      host_triplet: matrix.host_triplet
-      apt: matrix.apt
-      test: matrix.test
+      os: ${{ matrix.os }}
+      triplet: ${{ matrix.triplet }}
+      config: ${{ matrix.config }}
+      host_triplet: ${{ matrix.host_triplet }}
+      apt: ${{ matrix.apt }}
+      test: ${{ matrix.test }}
