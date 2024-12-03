@@ -1,0 +1,16 @@
+name: Matrix Example
+
+on: 
+  push:
+  workflow_dispatch:
+    inputs:
+      exclude:
+        description: 'Exclude triplets:'
+        type: string
+        default: '[]'
+        required: false
+
+jobs:
+  Build0:
+    uses: ./.github/workflows/matrix1.yml
+    secrets: inherit
