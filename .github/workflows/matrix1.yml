@@ -1,13 +1,7 @@
 name: Matrix Example
 
 on: 
-  workflow_call:
-    inputs:
-      matrix:
-        description: 'Matrix:'
-        type: string
-        required: true
-
+  push:
   workflow_dispatch:
     inputs:
       exclude:
@@ -17,18 +11,62 @@ on:
         required: false
 
 jobs:
-  echo:
+  Matrix:
     runs-on: ubuntu-latest
+    env:
+      MATRIX: >-
+        {
+          "os": [
+            "windows-latest",
+            "ubuntu-latest"
+          ],
+          "triplet": [
+            "x86-windows",
+            "x64-windows",
+            "x86-windows",
+            "x86-windows",
+            "x86-windows",
+            "x86-linux",
+            "x64-linux",
+            "arm-linux-gnueabi",
+            "arm-linux-gnueabihf",
+            "aarch64-linux-gnu"
+          ],
+          "config": [
+            "release",
+            "debug"
+          ],
+          "test": [ false ],
+
+          "include": [ 
+            {
+              "os": "windows-latest", 
+              "apt": "",
+              "host_triplet": "x64-windows"
+            },
+            {
+              "os": "ubuntu-latest", 
+              "apt": "",
+              "host_triplet": "x64-linux"
+            }
+          ]
+        }
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
     steps:
-    - name: Echo
-      run: |
-        echo "Matrix: ${{ inputs.matrix }}" >> $GITHUB_STEP_SUMMARY
+    - name: Matrix
+      id: matrix
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const matrix = JSON.parse(process.env.MATRIX);
+          core.setOutput('matrix', JSON.stringify(matrix));
         
   Build1:
     name: "${{ matrix.triplet }}-${{ matrix.config}}"
+    needs: Matrix
     strategy:
-      matrix: ${{ fromJson(inputs.matrix || '{}' ) }}
-
+      matrix: ${{ fromJson(needs.Matrix.outputs.matrix ) }}
     uses: ./.github/workflows/matrix2.yml
     secrets: inherit
     with:
