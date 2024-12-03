@@ -34,7 +34,7 @@ on:
         default: false
 
 jobs:
-  build:
+  Build2:
     runs-on: ubuntu-latest
     steps:
     - name: Echo2
