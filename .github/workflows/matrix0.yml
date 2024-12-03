@@ -54,11 +54,13 @@ jobs:
     outputs:
       matrix: ${{ steps.matrix.outputs.matrix }}
     steps:
-    - name: GetMatrix
+    - name: Matrix
       id: matrix
-      run: |
-        echo "matrix=$MATRIX" >> $GITHUB_STEP_SUMMARY
-        echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const matrix = JSON.parse(process.env.MATRIX);
+          return JSON.stringify(matrix);
 
   Build0:
     uses: ./.github/workflows/matrix1.yml
