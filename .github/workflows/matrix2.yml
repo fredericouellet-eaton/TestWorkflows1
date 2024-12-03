@@ -1,7 +1,6 @@
 name: Matrix 2 Example
 
 on: 
-  push:
   workflow_call:
     inputs:
       os:
