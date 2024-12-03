@@ -24,7 +24,9 @@ jobs:
           "triplet": [
             "x86-windows",
             "x64-windows",
-            "x86-windows",            
+            "x86-windows",
+            "x86-windows",
+            "x86-windows",
             "x86-linux",
             "x64-linux",
             "arm-linux-gnueabi",
