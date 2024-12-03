@@ -17,6 +17,13 @@ on:
         required: false
 
 jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Echo
+      run: |
+        echo "Matrix: ${{ inputs.matrix }}" >> $GITHUB_STEP_SUMMARY
+        
   Build1:
     strategy:
       matrix: ${{ fromJson(inputs.matrix || '{}' ) }}
