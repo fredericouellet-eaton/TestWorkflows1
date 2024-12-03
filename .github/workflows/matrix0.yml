@@ -60,7 +60,7 @@ jobs:
       with:
         script: |
           const matrix = JSON.parse(process.env.MATRIX);
-          return JSON.stringify(matrix);
+          core.setOutput('matrix', JSON.stringify(matrix));
 
   Build0:
     uses: ./.github/workflows/matrix1.yml
