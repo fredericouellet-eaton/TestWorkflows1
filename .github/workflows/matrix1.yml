@@ -60,7 +60,7 @@ jobs:
             apt: gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
             test: false        
 
-    uses: .github/workflows/matrix2yml
+    uses: .github/workflows/matrix2.yml
     secrets: inherit
     with:
       os: matrix.os
