@@ -35,7 +35,6 @@ on:
 
 jobs:
   Build:
-    name: "Build2 ${{ inputs.triplet }}-${{ inputs.config}}"
     runs-on: ubuntu-latest
     steps:
     - name: Echo2 
@@ -48,7 +47,6 @@ jobs:
         echo "Test: ${{ inputs.test }}" >> $GITHUB_STEP_SUMMARY
 
   Test:
-    name: "Test2 ${{ inputs.triplet }}-${{ inputs.config}}"
     needs: Build
     runs-on: ubuntu-latest
     steps:

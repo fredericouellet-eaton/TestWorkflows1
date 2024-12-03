@@ -17,15 +17,12 @@ jobs:
       MATRIX: >-
         {
           "os": [
-            "windows-latest",
-            "ubuntu-latest"
+            "windows",
+            "linux"
           ],
           "triplet": [
             "x86-windows",
             "x64-windows",
-            "x86-windows",
-            "x86-windows",
-            "x86-windows",
             "x86-linux",
             "x64-linux",
             "arm-linux-gnueabi",
@@ -35,19 +32,21 @@ jobs:
           "config": [
             "release",
             "debug"
-          ],
-          "test": [ false ],
-
+          ]
           "include": [ 
             {
-              "os": "windows-latest", 
+              "os": "windows",
+              "runner": "windows-latest", 
               "apt": "",
-              "host_triplet": "x64-windows"
+              "host_triplet": "x64-windows",
+              "test": false
             },
             {
-              "os": "ubuntu-latest", 
+              "os": "linux",
+              "runner": "ubuntu-latest", 
               "apt": "",
-              "host_triplet": "x64-linux"
+              "host_triplet": "x64-linux",
+              "test": false
             }
           ]
         }
