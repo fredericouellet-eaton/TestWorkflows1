@@ -35,12 +35,13 @@ on:
 
 jobs:
   Build2:
-    uses: ./.github/workflows/matrix3.yml
-    secrets: inherit
-    with:
-      os: ${{ inputs.os }}
-      triplet: ${{ inputs.triplet }}
-      config: ${{ inputs.config }}
-      host_triplet: ${{ inputs.host_triplet }}
-      apt: ${{ inputs.apt }}
-      test: ${{ inputs.test }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Echo2
+      run: |
+        echo "OS: ${{ inputs.os }}" >> $GITHUB_STEP_SUMMARY
+        echo "Triplet: ${{ inputs.triplet }}" >> $GITHUB_STEP_SUMMARY
+        echo "Config: ${{ inputs.config }}" >> $GITHUB_STEP_SUMMARY
+        echo "Host Triplet: ${{ inputs.host_triplet }}" >> $GITHUB_STEP_SUMMARY
+        echo "Apt: ${{ inputs.apt }}" >> $GITHUB_STEP_SUMMARY
+        echo "Test: ${{ inputs.test }}" >> $GITHUB_STEP_SUMMARY

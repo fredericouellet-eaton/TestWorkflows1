@@ -11,11 +11,10 @@ on:
         required: false
 
 jobs:
-  Build0:
-    uses: ./.github/workflows/matrix1.yml
-    secrets: inherit
-    with:      
-      matrix: >-
+  Matrix:
+    runs-on: ubuntu-latest
+    env:
+      MATRIX: >-
         {
           "os": [
             "windows-latest",
@@ -52,3 +51,19 @@ jobs:
             }
           ]
         }
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+    - name: GetMatrix
+      id: matrix
+      run: |
+        echo "matrix=$MATRIX" >> $GITHUB_STEP_SUMMARY
+        echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
+
+  Build0:
+    uses: ./.github/workflows/matrix1.yml
+    needs: Matrix
+    secrets: inherit
+    with:      
+      matrix: ${{ needs.Matrix.outputs.matrix }}
+      
