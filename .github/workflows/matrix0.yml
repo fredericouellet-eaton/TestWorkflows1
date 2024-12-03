@@ -36,6 +36,19 @@ jobs:
           "config": [
             "release",
             "debug"
+          ],
+          "test": [ false ],
+
+          "include": [ 
+            {
+              "os": "windows-latest", 
+              "apt": "",
+              "host_triplet": "x64-windows"
+            },
+            {
+              "os": "ubuntu-latest", 
+              "apt": "",
+              "host_triplet": "x64-linux"
+            }
           ]
-          "test": [ false ]
         }
