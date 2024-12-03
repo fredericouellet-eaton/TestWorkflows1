@@ -30,3 +30,13 @@ jobs:
       run: |
         echo "Triplet: ${{ inputs.triplet }}" >> $GITHUB_STEP_SUMMARY
         echo "Config: ${{ inputs.config }}" >> $GITHUB_STEP_SUMMARY
+
+  Coverity:
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Echo2 
+      run: |
+        echo "Triplet: ${{ inputs.triplet }}" >> $GITHUB_STEP_SUMMARY
+        echo "Config: ${{ inputs.config }}" >> $GITHUB_STEP_SUMMARY
+        
