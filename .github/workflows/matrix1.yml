@@ -32,7 +32,7 @@ jobs:
           "config": [
             "release",
             "debug"
-          ]
+          ],
           "include": [ 
             {
               "os": "windows",
